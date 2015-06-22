@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @producto.Precio %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @producto.Cantidad %>
+</p>
+
+
+
+<h2>Descripciones</h2>
+<% @producto.descripciones.each do |descripcion| %>
+  <p>
+    <strong>Titulo:</strong>
+    <%= descripcion.titulo %>
+  </p>
+ 
+  <p>
+    <strong>Total:</strong>
+    <%= descripcion.total_unidades %>
+  </p>
+
+  <p>
+    <strong>Ganancias:</strong>
+    <%= descripcion.ganancias %>
+  </p>
+  <p>
+  <%= link_to 'Destruir Descripcion', [descripcion.producto, descripcion], method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
+<% end %>
+
+
+
+<%= form_for([@producto, @producto.descripciones.build]) do |f| %>
+  <p>
+    <%= f.label :titulo %><br>
+    <%= f.text_field :titulo , data: { 'ng-model' => 'titulo' } %>
+  </p>
+  <p>
+    <%= f.label :total_unidades %><br>
+    <%= f.number_field :total_unidades, data: { 'ng-model' => 'total' } %>
+  </p>
+  <p>
+    <%= f.label :ganancias %><br>
+    <%= f.number_field :ganancias, data: { 'ng-model' => 'ganancia' }  %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+
+
+
+<%= link_to 'Edit', edit_producto_path(@producto) %> |
+<%= link_to 'Back', productos_path %>
+
+
+
+<h1>Ganancia{{ ganacia}}</h1>
+<br>
+<h1>Total{{total}}</h1>
+
+<p>Porcentaje de venta{{ ganacia + total }}</p>
+
+<p>ganancias netas {{ganancia * total}}</p>
+
+<hr>
+<h1>productos libres {{titulo}}</h1>
